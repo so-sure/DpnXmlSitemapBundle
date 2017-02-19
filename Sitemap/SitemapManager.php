@@ -32,6 +32,11 @@ class SitemapManager
     protected $maxPerSitemap;
 
     /**
+     * @var array
+     */
+    protected $additionalSitemaps;
+
+    /**
      * @var \Dpn\XmlSitemapBundle\Sitemap\Entry[]|null
      */
     protected $entries;
@@ -49,9 +54,10 @@ class SitemapManager
     /**
      * @param array           $defaults
      * @param int             $maxPerSitemap
+     * @param array           $additionalSitemaps
      * @param EngineInterface $templating
      */
-    public function __construct(array $defaults, $maxPerSitemap, EngineInterface $templating)
+    public function __construct(array $defaults, $maxPerSitemap, $additionalSitemaps, EngineInterface $templating)
     {
         $this->defaults = array_merge(
             array(
@@ -62,6 +68,7 @@ class SitemapManager
         );
 
         $this->maxPerSitemap = intval($maxPerSitemap);
+        $this->additionalSitemaps = $additionalSitemaps;
         $this->templating = $templating;
     }
 
@@ -170,6 +177,7 @@ class SitemapManager
             array(
                 'num_sitemaps' => $this->getNumberOfSitemaps(),
                 'host' => $host,
+                'additional_sitemaps' => $this->additionalSitemaps,
             )
         );
     }

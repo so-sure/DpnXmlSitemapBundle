@@ -11,4 +11,9 @@
             <loc>{{ host }}/sitemap.xml</loc>
         </sitemap>
     {% endfor %}
+    {% for additional_sitemap in additional_sitemaps %}
+        <sitemap>
+            <loc>{{ host }}/{{ additional_sitemap }}</loc>
+        </sitemap>
+    {% endfor %}
 </sitemapindex>

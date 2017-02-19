@@ -48,6 +48,10 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('additional_sitemaps')
+                    ->info('Any additional sitemaps that should be included in sitemap_index')
+                    ->prototype('scalar')->end()
+                ->end()
             ->end()
         ;
 

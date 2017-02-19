@@ -35,7 +35,7 @@ class DumpCommandTest extends \PHPUnit_Framework_TestCase
             ->once()
             ->andReturn(new RequestContext());
 
-        $manager = new SitemapManager(array(), 50000, $templating);
+        $manager = new SitemapManager(array(), 50000, array(), $templating);
         $manager->addGenerator(new TestGenerator(10));
 
         $application = new Application();
@@ -75,7 +75,7 @@ class DumpCommandTest extends \PHPUnit_Framework_TestCase
             ->once()
             ->andReturn(new RequestContext());
 
-        $manager = new SitemapManager(array(), 5, $templating);
+        $manager = new SitemapManager(array(), 5, array(), $templating);
         $manager->addGenerator(new TestGenerator(10));
 
         $application = new Application();
@@ -114,7 +114,7 @@ class DumpCommandTest extends \PHPUnit_Framework_TestCase
         $templating = m::mock('Symfony\Component\Templating\EngineInterface');
         $router = m::mock('Symfony\Component\Routing\RouterInterface');
 
-        $manager = new SitemapManager(array(), 5, $templating);
+        $manager = new SitemapManager(array(), 5, array(), $templating);
 
         $application = new Application();
         $application->add(new DumpCommand($manager, $router, sys_get_temp_dir()));
@@ -138,7 +138,7 @@ class DumpCommandTest extends \PHPUnit_Framework_TestCase
         $templating = m::mock('Symfony\Component\Templating\EngineInterface');
         $router = m::mock('Symfony\Component\Routing\RouterInterface');
 
-        $manager = new SitemapManager(array(), 5, $templating);
+        $manager = new SitemapManager(array(), 5, array(), $templating);
 
         $application = new Application();
         $application->add(new DumpCommand($manager, $router, sys_get_temp_dir()));

@@ -97,7 +97,7 @@ class SitemapManagerTest extends \PHPUnit_Framework_TestCase
             ->with('DpnXmlSitemapBundle::sitemap.xml.twig', m::type('array'))
             ->andReturn('rendered template');
 
-        $manager = new SitemapManager(array(), 1, $templating);
+        $manager = new SitemapManager(array(), 1, array(), $templating);
         $manager->addGenerator(new TestGenerator(2));
 
         $this->assertSame('rendered template', $manager->renderSitemap());
@@ -110,10 +110,10 @@ class SitemapManagerTest extends \PHPUnit_Framework_TestCase
         $templating
             ->shouldReceive('render')
             ->once()
-            ->with('DpnXmlSitemapBundle::sitemap_index.xml.twig', array('num_sitemaps' => 2, 'host' => 'http://localhost'))
+            ->with('DpnXmlSitemapBundle::sitemap_index.xml.twig', array('num_sitemaps' => 2, 'host' => 'http://localhost', 'additional_sitemaps' => array()))
             ->andReturn('rendered template');
 
-        $manager = new SitemapManager(array(), 1, $templating);
+        $manager = new SitemapManager(array(), 1, array(), $templating);
         $manager->addGenerator(new TestGenerator(2));
 
         $this->assertSame('rendered template', $manager->renderSitemapIndex('http://localhost'));
@@ -127,7 +127,7 @@ class SitemapManagerTest extends \PHPUnit_Framework_TestCase
      */
     private function getManager($numberOfEntries, $maxPerSitemap)
     {
-        $manager = new SitemapManager(array(), $maxPerSitemap, m::mock('Symfony\Component\Templating\EngineInterface'));
+        $manager = new SitemapManager(array(), $maxPerSitemap, array(), m::mock('Symfony\Component\Templating\EngineInterface'));
         $manager->addGenerator(new TestGenerator($numberOfEntries));
 
         return $manager;
